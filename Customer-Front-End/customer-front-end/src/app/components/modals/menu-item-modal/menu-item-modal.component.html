@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h5 class="modal-title">{{data.name}}</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body justify-content-center align-items-center">
+    <img class="d-block img-fluid mx-auto" src="https://upload.wikimedia.org/wikipedia/commons/4/47/Hamburger_%28black_bg%29.jpg"/>
+    <p style="margin-top: 1.5rem;">{{data.description}}</p>
+</div>
+<div class="modal-footer">
+    <div class="d-flex w-100 justify-content-end">
+            <button type="button" class="btn btn-primary me-1" (click)="addToCart()">Add to cart - {{data.price | currency}}</button>
+            <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+</div>

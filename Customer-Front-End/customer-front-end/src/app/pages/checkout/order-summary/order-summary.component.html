@@ -1,0 +1,20 @@
+<div class="container-lg">
+    <div class="row mt-5">
+        <div class="col-md-8">
+            <div class="border rounded p-3">
+                <h4>Items</h4>
+                <app-order-item-card *ngFor="let orderItem of cartService.cart;let indexOfItem = index" [data]="orderItem" [itemID]="indexOfItem"></app-order-item-card>
+            </div>
+        </div>
+        <div class="col-md-4 mt-3 mt-md-0">
+            <div class="border rounded p-3">
+                <h4>Summary</h4>
+                <p>Subtotal: {{orderService.order.subTotal | currency}}</p>
+                <p>Tax: {{orderService.order.tax | currency}}</p>
+                <p>Delivery Fee: {{orderService.order.deliveryFee | currency}}</p>
+                <p>Total: {{orderService.order.total | currency}}</p>
+                <button class="btn btn-primary" (click)="placeOrder()">Place Order</button>
+            </div>
+        </div>
+    </div>
+</div>

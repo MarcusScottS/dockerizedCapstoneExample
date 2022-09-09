@@ -1,0 +1,14 @@
+<div class="card m-2" style="width: 350px;">
+    <div class="card-body d-flex flex-column" (click)="openItemModal()">
+        <div class="d-flex justify-content-center">
+            <!--Super placeholder image, need to add an image link for restaurant logos to the DB-->
+            <img class="img-fluid" src="https://upload.wikimedia.org/wikipedia/commons/4/47/Hamburger_%28black_bg%29.jpg">
+        </div>
+        <div class="d-flex flex-column justify-content-center align-content-center">
+            <h6 class="text-center m-0">{{itemData.name}}</h6>
+            <div class="d-flex justify-content-center">
+                <p class="p-1 m-0">{{itemData.price | currency}}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="container-lg">
+    <div id="alert-bar" class="row">
+        <div class="">
+
+        </div>
+    </div>
+    <div id="return-holder" class="row m-1">
+        <a routerLink="../">Back</a>
+    </div>
+    <div class="row">
+        <div class="d-flex justify-content-center" *ngIf="!menuLoaded">
+            <div class="spinner-border"></div>
+        </div>
+        <div class="d-flex flex-wrap align-content-center justify-content-center">
+            <app-menu-item-card *ngFor="let menuItem of menu" [itemData]="menuItem"></app-menu-item-card>
+        </div>
+    </div>
+</div>

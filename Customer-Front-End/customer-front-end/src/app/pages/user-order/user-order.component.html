@@ -1,0 +1,94 @@
+<div class="container-lg">
+    <div id="return-holder" class="row m-1">
+        <a routerLink="../">Back</a>
+    </div>
+    <div class="row">
+        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center" *ngIf="!orderLoaded">
+            <div class="spinner-border"></div>
+        </div>
+        <div class="d-flex flex-wrap align-content-center justify-content-center border rounded p-3" *ngIf="orderLoaded && !editing">
+            <!-- <app-order-card  [orderData]="order"></app-order-card> -->
+            <div >
+                <p>Order ID: {{order.orderId}}</p>
+                <p>Order Time Created: {{order.timeCreated | date: 'short': 'UTC'}}</p>
+                <p>Order Status: {{order.orderStatus}}</p>
+                <p>Order Driver: {{order.driverFirstName}}</p>
+                <p>Driver Notes: {{order.driverNotes}}</p>
+                <p>Subtotal: {{order.subTotal | currency }}</p>
+                <p>Delivery Fee: {{order.deliveryFee | currency }}</p>
+                <p>Tip: {{order.tip | currency}}</p>
+                <p>Tax: {{order.tax | currency }}</p>
+                <p >Total: {{order.total | currency }}</p>
+                <!-- <p>Order Scheduled For: {{order.scheduledFor}}</p> -->
+                <p>Order Scheduled For: No Time Slot Selected</p>
+                <!-- <p>Order Net Loyalty Points: {{order.netLoyalty}}</p> -->
+                <p>Order Net Loyalty Points: 0</p>
+                <p>Restaurant Notes: {{order.restaurantNotes}}</p>
+                <p>Items Ordered: {{order.items.length}}</p>
+                    <div *ngFor="let item of order.items">
+                        <h6 >{{item.name}}</h6>
+                        <ul>
+                            <li>price: {{item.price | currency }}</li>
+                            <li>description: {{item.description}}</li>
+                            <li>notes: {{item.notes}}</li>
+                            <li>discount: {{item.discount | currency}}</li>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="d-flex flex-wrap align-content-center justify-content-center " *ngIf="editing">
+        <!-- <app-order-card  [orderData]="order"></app-order-card> -->
+        <div >
+            <p>Order ID: {{order.orderId}}</p>
+            <p>Order Status: {{order.orderStatus}}</p>
+            <p>Driver Notes: {{order.driverNotes}}</p>
+            <input type="text" placeholder="{{order.driverNotes}}" id="driverNotes" name="driverNotes"  [(ngModel)]="driverNotes" />
+            <p>Delivery Fee: {{order.deliveryFee | currency }}</p>
+            <p>Order Tip: {{order.tip | currency}}</p>
+            <input type="number" placeholder="{{order.tip}}" id="updateTip" name="updateTip" [(ngModel)]="updateTip" />
+            <p>Order Subtotal: {{order.subTotal | currency }}</p>
+            <p>Order Tax: {{order.tax | currency }}</p>
+            <p>Order Total: {{order.total | currency}}</p>
+            <p>Restaurant Notes: {{order.restaurantNotes}}</p>
+            <input type="text" placeholder="{{order.restaurantNotes}}" id="restaurantNotes" name="restaurantNotes" [(ngModel)]="restaurantNotes" />
+            <p>Items Ordered:</p>
+                    <div *ngFor="let item of orderItems; let i = index" [attr.data-index]="i">
+                        <h6 >{{item.name}}</h6>
+                        <ul>
+                            <li>price: {{item.price | currency}}</li>
+                        </ul>
+                        <p><button class="btn btn-danger" (click)="removeItem(i)">Remove Item</button></p>
+                    </div>
+                    <br>
+                    <div *ngIf="!addingItem">
+                        <button class="btn btn-primary mb-3" (click)="loadAddItem()">Add Item</button>
+                    </div>
+                <div *ngIf="addingItem">
+                    <h5>Add Items</h5>
+                            <select [(ngModel)]="restaurant" (change)="loadRestaurantMenu(restaurant)">
+                                <option value="default" class="btn btn-primary">Restaurants</option>
+                                    <option *ngFor="let restaurant of allRestaurants;" value="{{restaurant.name}}">{{restaurant.name}}</option>
+                            </select>
+                            <div *ngIf="restaurantMenuLoaded">
+                                <ul *ngFor="let item of restaurantMenu let i = index" [attr.data-index]="i">
+                                    <li>{{item.name}}</li>
+                                    <li>{{item.price | currency }}</li>
+                                    <button class="btn btn-primary" (click)="addItem(i)">Add Item</button>
+                                </ul>
+                            </div>
+                </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!editing && !orderCanceled">
+    <button class="btn btn-primary m-2 mb-3" (click)="loadEditPage()">Edit Order</button>
+    <button class="btn btn-danger m-2 mb-3" id="cancelOrder" (click)="cancelOrder()">Cancel Order</button>
+</div>
+<div *ngIf="editing && !orderCanceled">
+    <button class="btn btn-primary m-2 mb-3" (click)="sendEdit()">Send Edit</button>
+    <button class="btn btn-danger m-2 mb-3" (click)="cancelEdit()">Cancel Edit</button>
+</div>
+</div>

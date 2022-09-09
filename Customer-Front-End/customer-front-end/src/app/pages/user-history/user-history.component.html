@@ -1,0 +1,21 @@
+<div class="container-lg">
+    <div id="alert-bar" class="row">
+        <div class="">
+
+        </div>
+    </div>
+    <div id="return-holder" class="row m-1">
+        <a routerLink="/">Back</a>
+    </div>
+    <div class="row">
+        <div class="d-flex justify-content-center" *ngIf="!ordersLoaded">
+            <div class="spinner-border"></div>
+        </div>
+        <div class="d-flex justify-content-center" *ngIf="emptyData">
+            <div>No Orders To Display. We look forward to your first order with us!</div>
+        </div>
+        <div class="d-flex flex-wrap align-content-center justify-content-center">
+            <app-user-orders-card *ngFor="let order of allOrders" [userId]="userID"  [orderData]="order"></app-user-orders-card>    
+        </div>
+    </div>
+</div>

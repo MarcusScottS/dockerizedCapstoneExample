@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h5 class="modal-title">Cart</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body justify-content-center align-items-center">
+    <app-cart-item-card *ngFor="let cartItem of cartService.cart;let indexOfItem = index" [data]="cartItem" [cartID]="indexOfItem"></app-cart-item-card>
+</div>
+<div class="modal-footer">
+    <div class="d-flex w-100 justify-content-end">
+            <button type="button" class="btn btn-primary me-1" (click)="checkout()">Checkout</button>
+    </div>
+</div>

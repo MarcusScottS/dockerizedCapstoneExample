@@ -1,0 +1,6 @@
+node_modules/
+
+# mac auto generated files
+.DS_Store
+admin-front-end-react/.DS_Store
+admin-front-end-react/src/.DS_Store

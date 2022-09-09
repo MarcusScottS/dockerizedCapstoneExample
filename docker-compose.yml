@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  eureka:
+   build: ./eureka-microservice
+   ports:
+    - '8761:8761'
+   environment:
+    - SPRING_PROFILES_ACTIVE=dev
+  api-gateway:
+   build: ./gateway-microservice
+   ports:
+     - '8080:8080'
+   depends_on:
+    - eureka
+   environment:
+    - SPRING_PROFILES_ACTIVE=dev
+  # authentication-api:
+  #  build: ./authentication-microservice
+  #  ports:
+  #   - "8088:8088"
+  #  depends_on:
+  #   - eureka
+  #  environment:
+  #   - SPRING_PROFILES_ACTIVE=dev
+  order-api:
+   build: ./order-microservice
+   ports:
+    - "8083:8083"
+   depends_on:
+    - eureka
+   environment:
+    - SPRING_PROFILES_ACTIVE=dev
+  restaurant-api:
+   build: ./restaurant-microservice
+   ports:
+    - "8082:8082"
+   depends_on:
+    - eureka
+   environment:
+    - SPRING_PROFILES_ACTIVE=dev
+  # user-api:
+  #  build: ./user-microservice
+  #  ports:
+  #   - "8081:8081"
+  #  depends_on:
+  #   - eureka
+  #  environment:
+  #   - SPRING_PROFILES_ACTIVE=dev

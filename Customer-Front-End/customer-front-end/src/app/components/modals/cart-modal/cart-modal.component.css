@@ -1,0 +1,8 @@
+/*Doesn't currently work*/
+@media screen and (min-width: 768px) {
+    .modal-dialog {
+        margin-left: auto !important;
+        margin-top: 1.75rem !important;
+        margin-right: 1.75rem !important;
+    }
+}
